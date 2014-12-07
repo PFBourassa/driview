@@ -14,13 +14,13 @@ def not_pm(drive):
     if drive != "Project Media 1":
         if drive != "Project Media 2":
             if drive != "Project Media 3":
-                return true
+                return True
             else:
-                return false
+                return False
         else:
-            return false
+            return False
     else:
-        return false
+        return False
 
 def get_drives(v_path):
     drives = os.listdir(v_path)
@@ -29,11 +29,12 @@ def get_drives(v_path):
     return drives
 
 def get_projects(drive):
-    if drive != "Project Media 2":
+    if not_pm(drive):
         projects = os.listdir("%s/%s/Project Media" % (v_path, drive))
-    if drive == "Project Media 2":
+    else:
         projects = os.listdir("%s/%s" % (v_path, drive))
-    projects.remove(".DS_Store")
+    if _platform == "darwin":
+        projects.remove(".DS_Store")
     return projects
 
 def print_all(drives):
