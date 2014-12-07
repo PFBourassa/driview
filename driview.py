@@ -1,19 +1,29 @@
 import os
+from sys import platform as _platform
+
 v_path = "/home/../../Volumes"
+
+if _platform == "linux" or _platform == "linux2":
+    v_path = "/home/../../media/parker"
+elif _platform == "darwin":
+    v_path = "/home/../../Volumes"
+elif _platform == "win32":
+    v_path = "/home/../../Volumes"# Windows...
+
 
 def get_drives(v_path):
     drives = os.listdir(v_path)
-    drives.remove("Macintosh HD")
+    if "Macintosh HD" in drives :
+        drives.remove("Macintosh HD")
     return drives
 
 def get_projects(drive):
-    if drive != "Macintosh HD":
-        if drive != "Project Media 2":
-            projects = os.listdir("%s/%s/Project Media" % (v_path, drive))
-        if drive == "Project Media 2":
-            projects = os.listdir("%s/%s" % (v_path, drive))
-        projects.remove(".DS_Store")
-        return projects
+    if drive != "Project Media 2":
+        projects = os.listdir("%s/%s/Project Media" % (v_path, drive))
+    if drive == "Project Media 2":
+        projects = os.listdir("%s/%s" % (v_path, drive))
+    projects.remove(".DS_Store")
+    return projects
 
 def print_all(drives):
     for drive in drives:
