@@ -15,8 +15,9 @@ def findProjectMedia(drive):
             pm = os.path.join(root, file)
             return pm
             
-def listProjects(pm):
-    print os.listdir(pm)
+def listProjects(drive):
+    pm = findProjectMedia(drive)
+    return os.listdir(pm)
             
 #print listProjects(findProjectMedia("./Hard drive A"))
 print findHardDrives()

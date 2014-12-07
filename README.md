@@ -1,4 +1,4 @@
-driview
+Driview
 =======
 
 Summary
@@ -23,3 +23,14 @@ It also requires the human action of putting all projectmedia, in that folder, a
 
 All of the information collected by this method will be shown to the user through a browser.
 This could be hosted on server space,  or put into a Trello board. 
+
+Limitations
+-----------
+Driview cannot make changes to the hard drives. This is intentional.
+It means that driview cannot mistakenly make exrta copies,
+or accidently delete valueable material.
+Other programs are much better suited to do these tasks.
+
+Driview cannot see inside FCPX Libraries (yet!)
+This means that driview cannot tell users whether FCP knows where the footage is.
+This means that if project media lives inside a FCP library, but not in the /ProjectMedia folder, it will be invisible to driview, and may appear to be missing.
