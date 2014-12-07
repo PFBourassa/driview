@@ -10,6 +10,17 @@ elif _platform == "darwin":
 elif _platform == "win32":
     v_path = "/home/../../Volumes"# Windows...
 
+def not_pm(drive):
+    if drive != "Project Media 1":
+        if drive != "Project Media 2":
+            if drive != "Project Media 3":
+                return true
+            else:
+                return false
+        else:
+            return false
+    else:
+        return false
 
 def get_drives(v_path):
     drives = os.listdir(v_path)
