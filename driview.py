@@ -1,14 +1,17 @@
 import os
 from sys import platform as _platform
 
-v_path = "/home/../../Volumes"
+v_path = "."
 
-if _platform == "linux" or _platform == "linux2":
-    v_path = "/home/../../media/parker"
-elif _platform == "darwin":
-    v_path = "/home/../../Volumes"
-elif _platform == "win32":
-    v_path = "/home/../../Volumes"# Windows...
+
+#if _platform == "linux" or _platform == "linux2":
+#    v_path = "/home/../../media/parker"
+#elif _platform == "darwin":
+#    v_path = "/home/../../Volumes"
+#elif _platform == "win32":
+#    v_path = "/home/../../Volumes"# Windows...
+
+pm = ["Project Media", "ProjectMedia", "PROJECT MEDIA"]
 
 def not_pm(drive):
     if drive != "Project Media 1":
