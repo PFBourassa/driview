@@ -26,7 +26,7 @@ def not_pm(drive):
         return False
 
 def get_drives(v_path):
-    drives = os.listdir(v_path)
+    drives = os.listdir(v_path) #["Hard Drive A", "B"]
     if "Macintosh HD" in drives :
         drives.remove("Macintosh HD")
     return drives
