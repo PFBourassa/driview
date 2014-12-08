@@ -1,7 +1,7 @@
 import os
 from sys import platform as _platform
 
-v_path = "."
+v_path = "./Volumes"
 
 
 #if _platform == "linux" or _platform == "linux2":
