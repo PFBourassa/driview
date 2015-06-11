@@ -64,4 +64,4 @@ def get_size(start_path):
 
 drives = get_drives(v_path)
 #print_all(drives)
-testStatus.test()
+testStatus.test(drives)
