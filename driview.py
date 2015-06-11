@@ -1,3 +1,4 @@
+import testStatus
 import os
 from sys import platform as _platform
 
@@ -62,4 +63,5 @@ def get_size(start_path):
             return total_size
 
 drives = get_drives(v_path)
-print_all(drives)
+#print_all(drives)
+testStatus.test()

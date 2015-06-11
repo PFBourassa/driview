@@ -14,7 +14,7 @@ test_status = {
         ],
     'Hard Drive B':
         [
-            Childrens home of easton,
+            Childrens home,
             Older Adults,
             State Theater,
             Allentown Art Museum

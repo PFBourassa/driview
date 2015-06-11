@@ -68,6 +68,21 @@ status.py
 Responsible for updating the status of whatever drives are plugged in.
 takes 'new' and 'old' as arguments.
 
+drive.py
+--------
+Responsible for drive-specific tasks.
+
+Each drive needs:
+* Name
+* Size
+* Unused
+* Last seen time
+* Last seen location
+
+Each Project needs:
+* Name
+* 
+
 Trello Integration
 ==================
 
@@ -98,3 +113,8 @@ New info will always trump the status quo.
 Logging
 =======
 Where will the logs be kept exactly?
+
+TODO
+====
+Re-write not_pm()
+exporter
