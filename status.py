@@ -1,43 +1,70 @@
 #  Status is the fundamental unit of driveiew.
 
-#  status = {
-#  'Hard Drive A' : [CSC, Wigs, Etc],
-#  'Hard Drive B' : [Childrens home of easton]
-#  }
+import os
+from sys import platform as _platform
 
 test_status = {
-    'Hard Drive A':
-        [
-            CSC, 
-            Wigs, 
-            CareNow
-        ],
-    'Hard Drive B':
-        [
-            Childrens home,
-            Older Adults,
-            State Theater,
-            Allentown Art Museum
-        ]
+    "Hard Drive A":
+        ["Example", "CSC", "Peanuts", "Wigs"],
+    "Hard Drive B":
+        ["Example","Peanuts","CSC","Wigs", "Art Museum"]
 }
 
-status = {}
+def get_drives(v_path):
+    drives = os.listdir(v_path) #["Hard Drive A", "B"]
+    if "Macintosh HD" in drives :
+        drives.remove("Macintosh HD")
+    return drives
 
-def grab_drive(drive):
-    return status[drive]
+def not_pm(drive):
+    if drive != "Project Media 1":
+        if drive != "Project Media 2":
+            if drive != "Project Media 3":
+                return True
+            else:
+                return False
+        else:
+            return False
+    else:
+        return False
 
+def get_projects(drive, v_path):
+    if not_pm(drive):
+        projects = os.listdir("%s/%s/Project Media" % (v_path, drive))
+    else:
+        projects = os.listdir("%s/%s" % (v_path, drive))
+    if _platform == "darwin":
+        projects.remove(".DS_Store")
+    return projects
+
+class status:
+    """the funamental snapshot of driview"""
+    content = {}
+    def build(self, v_path):
+        drives = get_drives(v_path)
+        for drive in drives:
+            self.content[drive] = []
+            projects = get_projects(drive, v_path)
+            for project in projects:
+                self.content[drive].append(project)
+    def write(self):
+        for drive in self.content:
+            print "\n"
+            print drive
+            for project in self.content[drive]:
+                print project
+    
+    #tel['guido'] = 4127
+    
 def list_projects(d):
     drive = grab_drive(d)
     project_list = []
     for p in d:
-        project.append(p)
+        project_list.append(p)
     return project_list
 
 def add_drive(drive):
     status[drive] = []
-
-def remove drive(drive):
-    #mark drive as "removed"
 
 def update_status(old,new):
     for hard_drive in new:
@@ -57,3 +84,11 @@ def print_status(status):
         print "%s: " % drive
         for project in drive:
             print "%s" % project 
+            
+def checkforduplicates(status):
+    project_list = []
+    for drive in status:
+        for project in drive:
+            project_list.append(project)
+            
+    

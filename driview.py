@@ -1,6 +1,7 @@
 import testStatus
-import os
-from sys import platform as _platform
+import status
+#import os
+#from sys import platform as _platform
 
 v_path = "./Volumes"
 
@@ -14,32 +15,11 @@ v_path = "./Volumes"
 
 pm = ["Project Media", "ProjectMedia", "PROJECT MEDIA"]
 
-def not_pm(drive):
-    if drive != "Project Media 1":
-        if drive != "Project Media 2":
-            if drive != "Project Media 3":
-                return True
-            else:
-                return False
-        else:
-            return False
-    else:
-        return False
 
-def get_drives(v_path):
-    drives = os.listdir(v_path) #["Hard Drive A", "B"]
-    if "Macintosh HD" in drives :
-        drives.remove("Macintosh HD")
-    return drives
 
-def get_projects(drive):
-    if not_pm(drive):
-        projects = os.listdir("%s/%s/Project Media" % (v_path, drive))
-    else:
-        projects = os.listdir("%s/%s" % (v_path, drive))
-    if _platform == "darwin":
-        projects.remove(".DS_Store")
-    return projects
+
+
+
 
 def print_all(drives):
     for drive in drives:
@@ -62,6 +42,10 @@ def get_size(start_path):
             total_size += os.path.getsize(fp)
             return total_size
 
-drives = get_drives(v_path)
+#drives = get_drives(v_path)
 #print_all(drives)
-testStatus.test(drives)
+
+x = status.status()
+x.build(v_path)
+x.write()
+#testStatus.test(drives)
