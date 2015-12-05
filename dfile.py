@@ -20,12 +20,6 @@ def get_projects(drive):
         projects.remove(".DS_Store")
         return projects
 
-def print_all(drive_list):
-    for drive in drive_list:
-            print "\n"
-            print drive
-            print_projects(drive)
-
 def print_projects(drive):
     projects = get_projects(drive)
     for project in projects:

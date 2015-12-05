@@ -33,17 +33,23 @@ def open_state():
     return state
     
 def compare_states(old, new):
-    for drive in new:
-        compare_to_state(drive, old)
+    fnd = "f"
+    for new_drive in new:
+        fnd = "f"
+        for old_drive in old:
+            if (new_drive == old_drive):
+                fnd = "t"
+        if (fnd == "t"):
+            print "Found: %s" % new_drive
+            compare_to_state(new_drive, old)
+        else:
+            print "New Drive detected: %s " % new_drive
 
 def compare_to_state(new_drive, old_state):
-    for drive in old_state:
-        if (new_drive == drive):
-            print "Found: %s" % new_drive
-            if (dfile.make_project_dict(new_drive) == old_state[drive]):
-                print "projects match"
-            else:
-                print "####*****WOAH! LOOKOUT, SOMETHING IS WORNG*****####"
+    if (dfile.make_project_dict(new_drive) == old_state[new_drive]):
+        print "projects match"
+    else:
+        print "####*****WOAH! LOOKOUT, SOMETHING IS WORNG*****####"
 
     
 """
