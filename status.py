@@ -5,12 +5,7 @@
 #  'Hard Drive B' : [Childrens home of easton]
 #  }
 
-import driview
 
-v_path = "./../../../../Volumes"
-
-drives = driview.get_drive_list(v_path)
-driview.print_all(v_path, drives)
 
 """
 test_status = {
