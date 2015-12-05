@@ -4,8 +4,21 @@
 #  'Hard Drive A' : [CSC, Wigs, Etc],
 #  'Hard Drive B' : [Childrens home of easton]
 #  }
+import dfile
 
+def make_staus(drive_list):
+    #drive_list = dfile.get_drive_list()
+    state = {}
+    for drive in drive_list:
+        projects = dfile.get_projects(drive)
+        state[drive] = projects
+    return state
 
+def print_pretty(state):
+    for drive in state:
+        print drive
+        for project in state[drive] :
+            print project
 
 """
 test_status = {

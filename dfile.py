@@ -6,9 +6,7 @@ v_path = "./../../../../Volumes" #osx
 def get_drive_list():
     drives = os.listdir(v_path)
     drive_list = []
-    print drives
     for drive in drives:
-        print "checking drive %s" % drive
         if (os.path.isdir("%s/%s/Project Media" % (v_path, drive))):
             drive_list.append(drive)
     return drive_list
