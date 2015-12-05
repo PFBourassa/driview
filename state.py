@@ -29,9 +29,9 @@ def open_state():
 def compare_states(old, new):
     for new_drive in new:
         fnd = "f"
-        print "Checking for %s..." % new_drive
+        #print "Checking for %s..." % new_drive
         for old_drive in old:
-            print "Comparing to %s" % old_drive
+            #print "Comparing to %s" % old_drive
             if (new_drive == old_drive):
                 fnd = "t"
         if (fnd == "t"):
