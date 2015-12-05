@@ -5,6 +5,8 @@ Summary
 -------
 Files and projects move around, and computers are much better bookkeepers than any human. I propose a peice of software that will automatically search hard drives as they are available, and maintain a list of where project media is located. This program will make no changes to the content, or organization of the drives, it will simply present it’s findings in a human-readable format.
 
+Also works on OSX!
+
 Interface
 ---------
 This should be dead simple. 
