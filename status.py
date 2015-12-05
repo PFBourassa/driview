@@ -20,6 +20,24 @@ def print_pretty(state):
         for project in state[drive] :
             print project
 
+def save_entire_state():
+    f = open('state', 'w')
+    s = str(state)
+    f.write(s)
+
+def open_state():
+    f = open('state', 'r').read()
+    state = eval(f)
+    return state
+    
+def compare_to_state(new_drive, state):
+    for drive in state:
+        if (new_drive == drive):
+            print "Found: %s" % new_drive
+            if (dfile.get_projects(new_drive) == dfile.get_projects(drive)):
+                print "projects match"
+        
+        
 """
 test_status = {
     'Hard Drive A':
