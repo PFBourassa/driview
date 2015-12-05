@@ -33,10 +33,20 @@ def print_projects(drive):
         size = get_size("%s/%s/Project Media/%s" % (v_path, drive, project))
         print "%s bytes" % size
 
-def get_size(start_path):
+def get_size(drive, project):
+    start_path = "%s/%s/Project Media/%s" % (v_path, drive, project)
     total_size = 0
     for dirpath, dirnames, filenames in os.walk(start_path):
         for f in filenames:
             fp = os.path.join(dirpath, f)
             total_size += os.path.getsize(fp)
             return total_size
+
+def make_project_dict(drive):
+    project_dict = {}
+    projects = os.listdir("%s/%s/Project Media" % (v_path, drive))
+    projects.remove(".DS_Store")
+    for project in projects:
+        project_dict[project] = get_size(drive, project)
+        #print project
+    return project_dict

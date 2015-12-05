@@ -6,21 +6,23 @@
 #  }
 import dfile
 
-def make_staus(drive_list):
+def make_status(drive_list):
     #drive_list = dfile.get_drive_list()
     state = {}
     for drive in drive_list:
-        projects = dfile.get_projects(drive)
-        state[drive] = projects
+        project_dict = dfile.make_project_dict(drive)
+        state[drive] = project_dict
     return state
 
 def print_pretty(state):
     for drive in state:
+        print "\n"
         print drive
+        print "------"
         for project in state[drive] :
-            print project
+            print "%s: %s" % (project, state[drive][project])
 
-def save_entire_state():
+def save_entire_state(state):
     f = open('state', 'w')
     s = str(state)
     f.write(s)
@@ -30,66 +32,22 @@ def open_state():
     state = eval(f)
     return state
     
-def compare_to_state(new_drive, state):
-    for drive in state:
+def compare_states(old, new):
+    for drive in new:
+        compare_to_state(drive, old)
+
+def compare_to_state(new_drive, old_state):
+    for drive in old_state:
         if (new_drive == drive):
             print "Found: %s" % new_drive
-            if (dfile.get_projects(new_drive) == dfile.get_projects(drive)):
+            if (dfile.make_project_dict(new_drive) == old_state[drive]):
                 print "projects match"
-        
-        
+            else:
+                print "####*****WOAH! LOOKOUT, SOMETHING IS WORNG*****####"
+
+    
 """
-test_status = {
-    'Hard Drive A':
-        [
-            CSC, 
-            Wigs, 
-            CareNow
-        ],
-    'Hard Drive B':
-        [
-            Childrens Home,
-            Older Adults,
-            State Theater,
-            Allentown Art Museum
-        ]
-}
-
-status = {}
-
-
-def grab_drive(drive):
-    return status[drive]
-
-def list_projects(d):
-    drive = grab_drive(d)
-    project_list = []
-    for p in d:
-        project.append(p)
-    return project_list
-
-def add_drive(drive):
-    status[drive] = []
-
-def remove drive(drive):
-    #mark drive as "removed"
-
-def update_status(old,new):
-    for hard_drive in new:
-        if old[hard_drive]:
-            old[hard_drive] = hard_drive #Add a new hard drive
-            #Create a new Trello list
-        if old[hard_drive] != hard_drive:
-            old[hard_drive] = hard_drive #Update the old status
-
-def update_drive(drive, status):
-    for project in listProjects(drive):
-        if status[drive] == 0:
-            status[drive] = drive
-
-def print_status(status):
-    for drive in status:
-        print "%s: " % drive
-        for project in drive:
-            print "%s" % project 
-"""
+    new_proj_dict = dfile.make_project_dict(new_drive)
+    #print new_proj_dict
+    for project in old_state[drive]:
+        print "%s: %s" % (project, old_state[drive][project])"""
