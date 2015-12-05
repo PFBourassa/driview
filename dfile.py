@@ -11,15 +11,6 @@ def get_drive_list():
             drive_list.append(drive)
     return drive_list
 
-def get_projects(drive):
-    if drive != "Macintosh HD":
-        if drive != "Project Media 2":
-            projects = os.listdir("%s/%s/Project Media" % (v_path, drive))
-        if drive == "Project Media 2":
-            projects = os.listdir("%s/%s" % (v_path, drive))
-        projects.remove(".DS_Store")
-        return projects
-
 def print_projects(drive):
     projects = get_projects(drive)
     for project in projects:
@@ -41,6 +32,17 @@ def make_project_dict(drive):
     projects = os.listdir("%s/%s/Project Media" % (v_path, drive))
     projects.remove(".DS_Store")
     for project in projects:
-        project_dict[project] = get_size(drive, project)
+        if ".fcpbundle" not in project:
+            project_dict[project] = get_size(drive, project)
         #print project
     return project_dict
+  
+"""    
+def has_Project_Media(v_path, drive):
+    if (os.path.isdir("%s/%s/Project Media" % (v_path, drive))):
+        return True
+    if (os.path.isdir("%s/%s/Project Media " % (v_path, drive))):
+        return True
+    if (os.path.isdir("%s/%s/Project media" % (v_path, drive))):
+        return True
+"""
