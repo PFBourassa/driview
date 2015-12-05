@@ -1,2 +1,4 @@
-test_status = {
-'
+import 
+
+drives = get_drive_list(v_path)
+print_all(drives)

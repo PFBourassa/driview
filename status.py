@@ -5,6 +5,14 @@
 #  'Hard Drive B' : [Childrens home of easton]
 #  }
 
+import driview
+
+v_path = "./../../../../Volumes"
+
+drives = driview.get_drive_list(v_path)
+driview.print_all(v_path, drives)
+
+"""
 test_status = {
     'Hard Drive A':
         [
@@ -14,7 +22,7 @@ test_status = {
         ],
     'Hard Drive B':
         [
-            Childrens home of easton,
+            Childrens Home,
             Older Adults,
             State Theater,
             Allentown Art Museum
@@ -22,6 +30,7 @@ test_status = {
 }
 
 status = {}
+
 
 def grab_drive(drive):
     return status[drive]
@@ -57,3 +66,4 @@ def print_status(status):
         print "%s: " % drive
         for project in drive:
             print "%s" % project 
+"""
