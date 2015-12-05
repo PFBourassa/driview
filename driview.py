@@ -1,5 +1,5 @@
 import dfile
-import status
+import state
 
 
 
@@ -10,10 +10,10 @@ drive_list = dfile.get_drive_list()
 
 
 
-old_state = status.open_state()
-current_state = status.make_status(drive_list)
+old_state = state.open_state()
+current_state = state.make_status(drive_list)
 
-status.compare_states(old_state, current_state)
+state.compare_states(old_state, current_state)
 #status.print_pretty(old_state)
 
 
