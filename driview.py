@@ -1,10 +1,16 @@
 import os
-v_path = "/home/../../Volumes"
+#v_path = "/home/../../Volumes"
+v_path = "./../../../../Volumes"
 
-def get_drives(v_path):
+def get_drive_list(v_path):
     drives = os.listdir(v_path)
-    drives.remove("Macintosh HD")
-    return drives
+    drive_list = []
+    print drives
+    for drive in drives:
+        print "checking drive %s" % drive
+        if (os.path.isdir("%s/%s/Project Media" % (v_path, drive))):
+            drive_list.append(drive)
+    return drive_list
 
 def get_projects(drive):
     if drive != "Macintosh HD":
@@ -15,8 +21,8 @@ def get_projects(drive):
         projects.remove(".DS_Store")
         return projects
 
-def print_all(drives):
-    for drive in drives:
+def print_all(drive_list):
+    for drive in drive_list:
             print "\n"
             print drive
             print_projects(drive)
@@ -36,5 +42,6 @@ def get_size(start_path):
             total_size += os.path.getsize(fp)
             return total_size
 
-drives = get_drives(v_path)
+
+drives = get_drive_list(v_path)
 print_all(drives)
