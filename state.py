@@ -1,6 +1,12 @@
 import dfile
+global errors
+import os
+errors = {}
 
-def make_status():
+global s_path
+s_path = "./state.txt"
+
+def make_state():
     drive_list = dfile.get_drive_list()
     state = {}
     for drive in drive_list:
@@ -17,42 +23,47 @@ def print_pretty(state):
             print "%s: %s" % (project, state[drive][project])
 
 def save_entire_state(state):
-    f = open('state', 'w')
+    f = open('%s' % s_path, 'w')
     s = str(state)
     f.write(s)
 
 def open_state():
-    f = open('state', 'r').read()
-    state = eval(f)
-    return state
+    if (os.path.exists("%s" % s_path)):
+        f = open('%s' % s_path, 'r').read()
+        state = eval(f)
+        return state
+    else:
+        errors["No_state"] = s_path
     
-def compare_states(old, new):
-    for new_drive in new:
+def compare_states():
+    for new_drive in current_state:
         fnd = "f"
-        #print "Checking for %s..." % new_drive
-        for old_drive in old:
-            #print "Comparing to %s" % old_drive
+        for old_drive in old_state:
             if (new_drive == old_drive):
                 fnd = "t"
         if (fnd == "t"):
-            print "\n Found: %s \n" % new_drive
-            compare_to_state(new_drive, old)
+           familiar_drive(new_drive, old_state)
         else:
-            print "\n New Drive detected: %s " % new_drive
-            var = raw_input("Add drive to databse?")
-            if (var == "y"):
-                trial = old
-                add_drive_to_state(new_drive, trial)
-                print_pretty(trial)
-                ask = raw_input("Is this okay?")
-                if (ask =="y"):
-                    save_entire_state(trial)
-                else:
-                    old_state = open_state()
+            errors["Unknown_drive"] = new_drive
+            unkown_drive(new_drive)
+     
+def unkown_drive(new_drive):  
+    #print "\n New Drive detected: %s " % new_drive
+    var = "n"#var = raw_input("Add drive to databse?")
+    if (var == "y"):
+        trial = old
+        add_drive_to_state(new_drive, trial)
+        print_pretty(trial)
+        ask = raw_input("Is this okay?")
+        if (ask =="y"):
+            save_entire_state(trial)
+        else:
+            old_state = open_state()
 
-def compare_to_state(new_drive, old_state):
+def familiar_drive(new_drive, old_state):
     if (dfile.make_project_dict(new_drive) == old_state[new_drive]):
-        print "projects match"
+        pass
+        #print "projects match"
     else:
         print """#################################
 WOAH! LOOKOUT, SOMETHING IS WORNG
@@ -66,3 +77,15 @@ def add_drive_to_state(drive, state):
     #print_pretty(state)
     state[drive] = current_state[drive]
     #print_pretty(state)
+    
+def show_attached():
+    for drive in current_state:
+        if drive in old_state:
+            print "Drive %s found in database" % drive
+        if drive not in old_state:
+            print "New drive: %s found" % drive
+        
+
+global old_state
+
+global current_state
