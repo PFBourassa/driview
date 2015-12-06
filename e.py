@@ -10,6 +10,9 @@ def print_all():
         print error["Drive"]
         print error["Problem"]
 
+def resolve(i):
+    errors.pop(i)
+    
 """   
 [{"Drive": "Drive A", "Problem": "missing"}, 
 {"Drive": "Drive C", "Problem": "new"}]

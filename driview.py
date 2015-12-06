@@ -2,6 +2,7 @@ import dfile
 import state
 import ui
 import e
+import compare
 
 
 state.old_state = state.open_state()
@@ -13,6 +14,8 @@ state.current_state = state.make_state()
 #e.add("A", "dumb")
 #e.print_all()
 
+compare.init()
+compare.print_good()
 
 #state.compare_states(old_state, current_state)
 #status.print_pretty(old_state)

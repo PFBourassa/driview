@@ -39,6 +39,7 @@ def main_ui():
 def error_stuff():
     #print "LOOP"
     e.print_all
+    i = 0
     for error in e.errors:
         edrive = error["Drive"]
         print error
@@ -48,7 +49,8 @@ def error_stuff():
             if (vart == "y"):
                 state.add_drive_to_state(error["Drive"], state.old_state)
                 state.current_state = state.current_state
-        if (str(error) == "No_state"):
+                e.resolve(i)
+        if (error["Problem"] == "No_state"):
             print "Open state.py, and set a new s_path"
             ans = raw_input("Would you like to set a new s_path now?")
             if (ans == "y"):
@@ -64,7 +66,7 @@ def error_stuff():
                     state.save_entire_state(current_state)
                 if (confirm == "n"):
                     print "ok"
-        if "size_mismatch" in e.errors[0]:
+        if (error["Problem"] =="size_mismatch"):
             cdrive = error
             ans = raw_input("Use current drive data?")
             if (ans == "y"):
