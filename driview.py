@@ -1,6 +1,7 @@
 import dfile
 import state
 import ui
+import e
 
 
 state.old_state = state.open_state()
@@ -9,12 +10,13 @@ state.current_state = state.make_state()
 #global drive_list
 #drive_list = dfile.get_drive_list()
 
-
+#e.add("A", "dumb")
+#e.print_all()
 
 
 #state.compare_states(old_state, current_state)
 #status.print_pretty(old_state)
-for error in state.errors:
+if (e.errors != []):
     ui.error_stuff()
         
 ui.main_ui()

@@ -20,12 +20,20 @@ def print_projects(drive):
 
 def get_size(drive, project):
     start_path = "%s/%s/Project Media/%s" % (v_path, drive, project)
-    total_size = 0
-    for dirpath, dirnames, filenames in os.walk(start_path):
-        for f in filenames:
-            fp = os.path.join(dirpath, f)
-            total_size += os.path.getsize(fp)
-            return total_size
+    total_size = getFolderSize(start_path)
+    return total_size
+
+
+def getFolderSize(folder):
+    total_size = os.path.getsize(folder)
+    for item in os.listdir(folder):
+        itempath = os.path.join(folder, item)
+        if os.path.isfile(itempath):
+            total_size += os.path.getsize(itempath)
+        elif os.path.isdir(itempath):
+            total_size += getFolderSize(itempath)
+    return total_size
+
 
 def make_project_dict(drive):
     project_dict = {}

@@ -1,8 +1,9 @@
 import dfile
-global errors
 import os
-errors = {}
+import e
 
+global old_state
+global current_state
 global s_path
 s_path = "./state.txt"
 
@@ -44,48 +45,56 @@ def compare_states():
         if (fnd == "t"):
            familiar_drive(new_drive, old_state)
         else:
-            errors["Unknown_drive"] = new_drive
-            unkown_drive(new_drive)
+            e.add(new_drive, "Unknown_drive")
+            #error.errors["Unknown_drive"] = new_drive
+            #unkown_drive(new_drive)
      
-def unkown_drive(new_drive):  
-    #print "\n New Drive detected: %s " % new_drive
-    var = "n"#var = raw_input("Add drive to databse?")
-    if (var == "y"):
-        trial = old
-        add_drive_to_state(new_drive, trial)
-        print_pretty(trial)
-        ask = raw_input("Is this okay?")
-        if (ask =="y"):
-            save_entire_state(trial)
-        else:
-            old_state = open_state()
-
-def familiar_drive(new_drive, old_state):
-    if (dfile.make_project_dict(new_drive) == old_state[new_drive]):
-        pass
-        #print "projects match"
+def add_drive_to_state(new_drive, old):
+    trial = old
+    current_state = make_state()
+    trial[new_drive] = current_state[new_drive]
+    print_pretty(trial)
+    ask = raw_input("Is this okay?")
+    if (ask =="y"):
+        save_entire_state(trial)
     else:
-        print """#################################
-WOAH! LOOKOUT, SOMETHING IS WORNG
-#################################"""
-        var = raw_input("should we let this go?")
-        
-def add_drive_to_state(drive, state):
-    current_state = make_status()
+        old_state = open_state()
+
+def add_drive_to_stte(drive):
+    current_state = make_state()
     #print current_state[drive]
     #print "\n"
     #print_pretty(state)
     state[drive] = current_state[drive]
     #print_pretty(state)
+
+def familiar_drive(new_drive, old_state):
+    if (dfile.make_project_dict(new_drive) == old_state[new_drive]):
+        return True
+        #print "projects match"
+    if (new_drive in errors):
+        #print "I know about this error"
+        return True
+    else:
+        print """##################################
+WOAH! LOOKOUT, SOMETHING IS WORNG!
+%s
+##################################""" % new_drive
+        var = raw_input("Continue?")
+        error.errors["%s" % new_drive] = "size_mismatch"
+        
+
     
 def show_attached():
     for drive in current_state:
         if drive in old_state:
-            print "Drive %s found in database" % drive
+            print "%s: found in database" % drive
+            if (current_state[drive] == old_state[drive]):
+                print "It's a match"
+            if (current_state[drive] != old_state[drive]):
+                print "Different size"
         if drive not in old_state:
             print "New drive: %s found" % drive
+    print "\n"
         
 
-global old_state
-
-global current_state
