@@ -10,9 +10,9 @@ def init():
             q = {"Name": p, "Copies": 1}
             if q not in projects:
                 projects.append({"Name": p, "Copies": 1})
-                print p
+                #print p
             elif q in projects:
-                print "%s is a duplicate" % p
+                #print "%s is a duplicate" % p
                 try:
                    id = projects.index(q)
                    q["Copies"] += 1

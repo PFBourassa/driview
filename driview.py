@@ -15,7 +15,7 @@ state.current_state = state.make_state()
 #e.print_all()
 
 compare.init()
-compare.print_good()
+#compare.print_good()
 
 #state.compare_states(old_state, current_state)
 #status.print_pretty(old_state)
